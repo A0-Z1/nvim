@@ -4,7 +4,7 @@ function! Branches()
     if branch ==# ""
         let status  = ""
     else
-        let status = " ".branch[5:-3]."  "
+        let status = "   ".branch[5:-3]."  "
     endif
 
     return status

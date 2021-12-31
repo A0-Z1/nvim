@@ -10,4 +10,4 @@ nnoremap <buffer><silent> <localleader>h :!xdg-open /home/ld/Documents/Manuali/L
 " symbols table
 nnoremap <buffer><silent> <localleader>H :!xdg-open /home/ld/Documents/Manuali/Latex/symbols.pdf &<CR>:redraw!<CR>
 " LSP
-"setlocal omnifunc=v:lua.vim.lsp.omnifunc
+setlocal omnifunc=v:lua.vim.lsp.omnifunc

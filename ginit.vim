@@ -10,10 +10,10 @@ if exists(':GuiFont')
     GuiFont Hack Nerd Font:h11
 endif
 
-" Disable GUI Tabline
-if exists(':GuiTabline')
-    GuiTabline 0
-endif
+"" Disable GUI Tabline
+"if exists(':GuiTabline')
+"    GuiTabline 0
+"endif
 
 " Disable GUI Popupmenu
 if exists(':GuiPopupmenu')

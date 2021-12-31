@@ -50,9 +50,20 @@ call plug#begin('~/.local.share/nvim/plugged')
 
 Plug 'tpope/vim-surround' " easy bracket managing
 Plug 'tpope/vim-fugitive' " Add integration with Git
-"Plug 'neovim/nvim-lspconfig' " LSP
+Plug 'neovim/nvim-lspconfig' " LSP
 Plug 'ervandew/supertab' " TAB completion
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+Plug 'vimwiki/vimwiki'
+"" colorschemes
+"Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+"Plug 'ayu-theme/ayu-vim' " or other package manager
+"Plug 'savq/melange'
+"Plug 'joshdick/onedark.vim'
+"Plug 'chriskempson/base16-vim'
+"Plug 'kyoz/purify', { 'rtp': 'vim' }
+"Plug 'mangeshrex/uwu.vim'
+Plug 'tomasr/molokai'
 
 call plug#end()
 "}}}
@@ -65,9 +76,10 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
 "" LSP
-"lua require('lspconfig').pylsp.setup{}
-"lua require('lspconfig').r_language_server.setup{}
-"lua require('lspconfig').texlab.setup{}
+lua require('lspconfig').pylsp.setup{}
+lua require('lspconfig').bashls.setup{}
+lua require('lspconfig').r_language_server.setup{}
+lua require('lspconfig').texlab.setup{}
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -77,6 +89,7 @@ augroup supertab
     autocmd FileType tex let b:SuperTabContextTextMemberPatterns = ['\\', '{']
     autocmd FileType html let b:SuperTabContextTextMemberPatterns = ['</', '<']
     autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
+    autocmd FileType sh let b:SuperTabContextTextMemberPatterns = ['\$']
 augroup END
 " terminal remappings
 nmap <silent> <F4> <Plug>CreateDynamicCons
@@ -94,18 +107,25 @@ augroup terminal_remap
 augroup END
 " nnn remapping
 nmap <silent> <F3> <Plug>NNNChoose_file
+" tokyonight
+"let tokyonight_style = "night"
+"let tokyonight_style = "storm"
+"let tokyonight_style = "light"
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+"let ayucolor="dark"   " for dark version of theme
 "}}}
 
 " Put all the highlight settings here
 "{{{
 " launch colorscheme
-colorscheme dracula
+colorscheme molokai
 " enable transparency with colorscheme
 "hi Normal guibg=NONE
 " set cursorline
-hi cursorline gui=none guifg=none guibg=grey25
+"hi cursorline gui=none guifg=none guibg=grey25
 " set cursorcolumn
-hi cursorcolumn gui=none guifg=none guibg=grey40
+"hi cursorcolumn gui=none guifg=none guibg=grey40
 " set floating window border color
 hi FloatBorder guifg=#d79921
 " set error message
