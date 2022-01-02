@@ -27,6 +27,8 @@ let &grepprg="grep -nP $* /dev/null"
 let &makeprg="autocompile $*"
 " settings specific to neovim
 set nocompatible
+" update time for CursorHold event in milliseconds
+set updatetime=250
 " set mouse
 set mouse=a
 set omnifunc=syntaxcomplete#Complete
@@ -80,6 +82,14 @@ lua require('lspconfig').pylsp.setup{}
 lua require('lspconfig').bashls.setup{}
 lua require('lspconfig').r_language_server.setup{}
 lua require('lspconfig').texlab.setup{}
+" disable virtual text by default
+lua vim.diagnostic.config({virtual_text = false})
+" change sign symbols
+sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
+
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -99,12 +109,6 @@ nmap <silent> <F7> <Plug>ToggleTerminal
 tmap <silent> <F7> <C-\><C-n><Plug>ToggleTerminal
 nmap <silent> <F9> <Plug>KillTerminal
 tmap <silent> <F9> <C-\><C-n><Plug>KillTerminal
-augroup terminal_remap
-    autocmd!
-    " close terminal window (but not process)
-    autocmd TermOpen,BufEnter * if &buftype ==# "terminal" | nnoremap <buffer><silent> <A-q> :q<CR> | endif
-    autocmd TermOpen,BufEnter * if &buftype ==# "terminal" | tnoremap <buffer><silent> <A-q> <C-\><C-n>:q<CR> | endif
-augroup END
 " nnn remapping
 nmap <silent> <F3> <Plug>NNNChoose_file
 " tokyonight
