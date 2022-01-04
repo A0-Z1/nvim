@@ -84,12 +84,8 @@ lua require('lspconfig').r_language_server.setup{}
 lua require('lspconfig').texlab.setup{}
 " disable virtual text by default
 lua vim.diagnostic.config({virtual_text = false})
-" change sign symbols
-sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
-sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
-sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
-sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
-
+lua vim.api.nvim_set_keymap('n', ']w', ':lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true, silent = true})
+lua vim.api.nvim_set_keymap('n', '[w', ':lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true, silent = true})
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -205,6 +201,3 @@ nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:c
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
 "}}}
-
-"" Welcome message
-"execute "echo 'Welcome back. Today is' strftime(\"%A %d %B %Y\")"

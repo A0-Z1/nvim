@@ -11,10 +11,10 @@ function _G.toggle_diagnostics()
   end
 end
 
--- This will switch between virtual text and floating window
+-- This will switch between virtual text and floating window diagnostic
 vim.cmd([[augroup LSP
     autocmd!
-    autocmd CursorHold * lua if vim.g.diagnostics_active == false then vim.diagnostic.open_float(0, {scope = "cursor"}) end
+    autocmd CursorHold * lua if vim.g.diagnostics_active == false then vim.diagnostic.open_float(0, {scope = "cursor", focusable = false}) end
 augroup END]])
 
 vim.api.nvim_set_keymap('n', '<leader>vt', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
