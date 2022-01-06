@@ -3,8 +3,15 @@
 "setlocal keywordprg=Rdoc
 setlocal nowrap
 " only with Nvim-R
-let R_rconsole_width = 57
+let R_rconsole_width = 54
 let R_min_editor_width = 18
+" for GUI instance
+if exists('g:GtkGuiLoaded')
+    vmap <buffer><silent> <C-ENTER> <Plug>RDSendSelection
+    nmap <buffer><silent> <C-ENTER> <Plug>RDSendLine
+    imap <buffer><silent> <C-ENTER> <C-o><Plug>RSendLine
+    let R_assign_map = '<M-->'
+endif                                                 
 " LSP
 "setlocal omnifunc=v:lua.vim.lsp.omnifunc
 "" terminal commands

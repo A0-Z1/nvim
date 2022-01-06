@@ -1,20 +1,34 @@
--- this toggles virtual text. Can be easily modified to
--- remove diagnostics altogether
-vim.g.diagnostics_active = false
+-- this toggles virtual text into floating
+-- window. 
+vim.g.virtual_active = false
 function _G.toggle_diagnostics()
-  if vim.g.diagnostics_active then
-    vim.g.diagnostics_active = false
+  if vim.g.virtual_active then
+    vim.g.virtual_active = false
     vim.diagnostic.config({virtual_text = false})
   else
-    vim.g.diagnostics_active = true
+    vim.g.virtual_active = true
     vim.diagnostic.config({virtual_text = true})
   end
 end
 
+-- This toggles diagnostics altogehter
+vim.g.diagnostic_visible = true
+function _G.hide_diagnostics()
+    if vim.g.diagnostic_visible then
+        vim.g.diagnostic_visible = false
+        vim.diagnostic.disable(0, nil)
+    else
+        vim.g.diagnostic_visible = true
+        vim.diagnostic.enable(0, nil)
+    end
+end
+
+
 -- This will switch between virtual text and floating window diagnostic
 vim.cmd([[augroup LSP
     autocmd!
-    autocmd CursorHold * lua if vim.g.diagnostics_active == false then vim.diagnostic.open_float(0, {scope = "cursor", focusable = false}) end
+    autocmd CursorHold * lua if not vim.g.virtual_active and vim.g.diagnostic_visible then vim.diagnostic.open_float(0, {scope = "cursor", focusable = false}) end
 augroup END]])
 
 vim.api.nvim_set_keymap('n', '<leader>vt', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>tt', ':call v:lua.hide_diagnostics()<CR>',  {noremap = true, silent = true})

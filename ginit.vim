@@ -7,6 +7,10 @@
 if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Font', 'Hack Nerd Font 12')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
+    " send lines to terminal (only valid in gvim apparently)
+    nmap <silent> <C-ENTER> <Plug>SendLine
+    imap <silent> <C-ENTER> <C-o><Plug>SendLine
+    vmap <silent> <C-ENTER> <Plug>SendSelection
 endif                                                 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,7 +58,3 @@ endif
 "snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 "
 "
-"" send lines to terminal (only valid in gvim apparently)
-"nmap <silent> <C-ENTER> <Plug>SendLine
-"imap <silent> <C-ENTER> <C-o><Plug>SendLine
-"vmap <silent> <C-ENTER> <Plug>SendSelection

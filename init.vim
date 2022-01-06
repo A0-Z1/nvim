@@ -55,7 +55,9 @@ Plug 'tpope/vim-fugitive' " Add integration with Git
 Plug 'neovim/nvim-lspconfig' " LSP
 Plug 'ervandew/supertab' " TAB completion
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
+Plug 'chrisbra/csv.vim'
 Plug 'vimwiki/vimwiki'
+Plug 'junegunn/fzf.vim'
 "" colorschemes
 "Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
@@ -95,7 +97,8 @@ augroup supertab
     autocmd FileType tex let b:SuperTabContextTextMemberPatterns = ['\\', '{']
     autocmd FileType html let b:SuperTabContextTextMemberPatterns = ['</', '<']
     autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
-    autocmd FileType sh let b:SuperTabContextTextMemberPatterns = ['\$']
+    autocmd FileType sh let b:SuperTabContextTextMemberPatterns = ['\$', '(']
+    autocmd FileType r let b:SuperTabContextTextMemberPatterns = ['\.', '\$']
 augroup END
 " terminal remappings
 nmap <silent> <F4> <Plug>CreateDynamicCons
@@ -143,7 +146,9 @@ nnoremap <silent> <C-p> "+p
 " copy to the end of line
 nnoremap <silent> Y y$
 " View the current buffers
-nnoremap <silent> <leader>b :ls<CR>:buffer<SPACE>
+"nnoremap <silent> <leader>b :ls<CR>:buffer<SPACE>
+" (using fzf)
+nnoremap <silent> <leader>b :Buffers<CR>
 " Switch to prev/next buffer
 nnoremap <silent> <leader>n :bnext<CR>
 nnoremap <silent> <leader>N :bprevious<CR>
