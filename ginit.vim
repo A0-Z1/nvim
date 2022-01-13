@@ -11,6 +11,8 @@ if exists('g:GtkGuiLoaded')
     nmap <silent> <C-ENTER> <Plug>SendLine
     imap <silent> <C-ENTER> <C-o><Plug>SendLine
     vmap <silent> <C-ENTER> <Plug>SendSelection
+    nnoremap <silent> <M-,> gT
+    nnoremap <silent> <M-.> gt
 endif                                                 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

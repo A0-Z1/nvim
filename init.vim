@@ -58,6 +58,7 @@ Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'chrisbra/csv.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/fzf.vim'
+Plug 'glepnir/dashboard-nvim'
 "" colorschemes
 "Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
@@ -74,6 +75,16 @@ call plug#end()
 
 " Put all the plugin settings here
 "{{{
+" Dashboard
+let g:dashboard_default_executive = "fzf"
+let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
 " NetRw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -86,8 +97,6 @@ lua require('lspconfig').r_language_server.setup{}
 lua require('lspconfig').texlab.setup{}
 " disable virtual text by default
 lua vim.diagnostic.config({virtual_text = false})
-lua vim.api.nvim_set_keymap('n', ']w', ':lua vim.lsp.diagnostic.goto_next()<CR>', {noremap = true, silent = true})
-lua vim.api.nvim_set_keymap('n', '[w', ':lua vim.lsp.diagnostic.goto_prev()<CR>', {noremap = true, silent = true})
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -98,18 +107,29 @@ augroup supertab
     autocmd FileType html let b:SuperTabContextTextMemberPatterns = ['</', '<']
     autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
     autocmd FileType sh let b:SuperTabContextTextMemberPatterns = ['\$', '(']
-    autocmd FileType r let b:SuperTabContextTextMemberPatterns = ['\.', '\$']
+    autocmd FileType r let b:SuperTabContextTextMemberPatterns = ['\.', '\$', ':']
 augroup END
-" terminal remappings
-nmap <silent> <F4> <Plug>CreateDynamicCons
-nmap <silent> <F5> <Plug>CreateDynamicTerm
-nmap <silent> <F6> <Plug>CreateDynamicDebugger
-nmap <silent> <F7> <Plug>ToggleTerminal
-tmap <silent> <F7> <C-\><C-n><Plug>ToggleTerminal
-nmap <silent> <F9> <Plug>KillTerminal
-tmap <silent> <F9> <C-\><C-n><Plug>KillTerminal
-" nnn remapping
-nmap <silent> <F3> <Plug>NNNChoose_file
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Wikis/Personal',
+      \ 'path_html': '~/Wikis/Personal/html/',
+      \ 'template_path': '~/Wikis/templates/',
+      \ 'template_ext': '.html',
+      \ 'template_default': 'default'},
+      \ {'path': '~/Wikis/Machine\ Learning',
+      \ 'path_html': '~/Wikis/Machine\ Learning/html/',
+      \ 'template_path': '~/Wikis/templates/',
+      \ 'template_ext': '.html',
+      \ 'template_default': 'default'},
+      \ {'path': '~/Wikis/Coding',
+      \ 'path_html': '~/Wikis/Coding/html/',
+      \ 'template_path': '~/Wikis/templates/',
+      \ 'template_ext': '.html',
+      \ 'template_default': 'default'},
+      \ {'path': '~/Wikis/Work',
+      \ 'path_html': '~/Wikis/Work/html/',
+      \ 'template_path': '~/Wikis/templates/',
+      \ 'template_ext': '.html',
+      \ 'template_default': 'default'}]
 " tokyonight
 "let tokyonight_style = "night"
 "let tokyonight_style = "storm"
@@ -197,7 +217,7 @@ nnoremap <silent> <leader>qp :cprev<CR>
 nnoremap <silent> <leader>qf :cfirst<CR>
 nnoremap <silent> <leader>ql :clast<CR>
 " compile
-nnoremap <silent> <localleader>c :make %<CR>
+nnoremap <silent> <leader>m :make %<CR>
 " Project drawer
 nnoremap <silent> <F2> :Lexplore<CR>
 " change directory to local file
@@ -205,4 +225,17 @@ nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:c
 "" commands
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
+
+nnoremap <silent> <leader>f :Files<CR>
+command! Myscripts :Files /home/ld/.scripts
+
+"" mappings for dashboard.nvim
+" nmap <Leader>ss :<C-u>SessionSave<CR>
+" nmap <Leader>sl :<C-u>SessionLoad<CR>
+" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
+" nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
+" nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
+" nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
+" nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
+" nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 "}}}

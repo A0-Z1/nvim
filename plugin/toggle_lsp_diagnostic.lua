@@ -30,5 +30,7 @@ vim.cmd([[augroup LSP
     autocmd CursorHold * lua if not vim.g.virtual_active and vim.g.diagnostic_visible then vim.diagnostic.open_float(0, {scope = "cursor", focusable = false}) end
 augroup END]])
 
-vim.api.nvim_set_keymap('n', '<leader>vt', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>tt', ':call v:lua.hide_diagnostics()<CR>',  {noremap = true, silent = true})
+vim.cmd(':command! Diagnostics :call v:lua.hide_diagnostics()')
+vim.cmd(':command! Virtual :call v:lua.toggle_diagnostics()')
+-- vim.api.nvim_set_keymap('n', '<leader>vt', ':call v:lua.toggle_diagnostics()<CR>',  {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<leader>tt', ':call v:lua.hide_diagnostics()<CR>',  {noremap = true, silent = true})

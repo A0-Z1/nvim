@@ -30,9 +30,15 @@ function! s:HorTerm(cmd)
         " determine terminal id and buffer
         let t:term_id = b:terminal_job_id
         let t:buf = bufnr()
+        " ESC goes to normal mode, but only for this kind of terminal
+        tnoremap <buffer><silent> <ESC> <C-\><C-n>
+        " jump to original window
+        exec "wincmd p | stopinsert"
     else
         " if it exists, open current iteration
         exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:buf
+        " jump to original window
+        exec "wincmd p | stopinsert"
     endif
 endfunction
 
@@ -42,8 +48,13 @@ function! s:VertTerm(cmd)
         exec float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)."vnew \| call termopen(\"" . a:cmd . "\")"
         let t:term_id = b:terminal_job_id
         let t:buf = bufnr()
+        tnoremap <buffer><silent> <ESC> <C-\><C-n>
+        " jump to original window
+        exec "wincmd p | stopinsert"
     else
         exec 'vert sbuffer '.t:buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+        " jump to original window
+        exec "wincmd p | stopinsert"
     endif
 endfunction
 
@@ -97,14 +108,18 @@ endfunction
 " toggle presence of terminal window (without killing process)
 function! ToggleTerm()
     if t:term_id ==# -1
-        echohl Warning | echom "No terminal active!" | echohl None
+        call CreateTermDynamic(<SID>Interpreter())
     else
         let win_numb = bufwinnr(t:buf)
         if win_numb ==# -1
             if nvim_list_uis()[0].width >= g:switch_to_horizontal
                 exec 'vert sbuffer '.t:buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+                " jump to original window
+                exec "wincmd p | stopinsert"
             else
                 exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:buf
+                " jump to original window
+                exec "wincmd p | stopinsert"
             endif
         else
             execute win_numb . " wincmd q"
@@ -203,20 +218,18 @@ augroup END
 " NB sbuffer +resizeM N means I am using the cmd resize. A command in sbuffer
 " must be prefixed with +. Also, float2nr converts floats to ints. Necessary
 " since window resizing only takes integers.
-nmap <silent> <localleader>th <Plug>CreateHorTerm
-nmap <silent> <localleader>tv <Plug>CreateVertTerm
-nmap <silent> <localleader>tt <Plug>CreateDynamicTerm
-nmap <silent> <localleader>tT <Plug>CreateDynamicCons
-nmap <silent> <localleader>td <Plug>CreateDynamicDebugger
-nmap <silent> <localleader>TT <Plug>ToggleTerminal
-tmap <silent> <localleader>TT <C-\><C-n><Plug>ToggleTerminal
-nmap <silent> <C-\><C-k> <Plug>KillTerminal
-tmap <silent> <C-\><C-k> <C-\><C-n><Plug>KillTerminal
+nmap <silent> <leader>th <Plug>CreateHorTerm
+nmap <silent> <leader>tv <Plug>CreateVertTerm
+nmap <silent> <leader>TT <Plug>CreateDynamicTerm
+nmap <silent> <leader>tT <Plug>CreateDynamicCons
+nmap <silent> <leader>td <Plug>CreateDynamicDebugger
+nmap <silent> <leader>tt <Plug>ToggleTerminal
+nmap <silent> <leader>tk <Plug>KillTerminal
 
 " copy lines of code into the terminal
 " but if there is no terminal, send a warning
-nmap <silent> <localleader>ts <Plug>SendLine
-vmap <silent> <localleader>ts <Plug>SendSelection
+nmap <silent> <leader>ts <Plug>SendLine
+vmap <silent> <leader>ts <Plug>SendSelection
 
 nnoremap <silent> <Plug>CreateHorTerm :call CreateTerm("hor", <SID>Interpreter())<CR>
 nnoremap <silent> <Plug>CreateVertTerm :call CreateTerm("vert", <SID>Interpreter())<CR>

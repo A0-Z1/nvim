@@ -63,4 +63,3 @@ endfunction
 nmap <silent> <leader>T <Plug>TodoList
 
 command! TODO :call TODO()
-nnoremap <silent> <Plug>TodoList :TODO<CR>
