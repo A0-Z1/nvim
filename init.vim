@@ -58,6 +58,7 @@ Plug 'chrisbra/csv.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/fzf.vim'
 Plug 'tomasr/molokai'
+Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
 "}}}
@@ -97,27 +98,60 @@ let g:vimwiki_list = [{'path': '~/Wikis/Personal',
       \ 'template_path': '~/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'}]
-" tokyonight
-"let tokyonight_style = "night"
-"let tokyonight_style = "storm"
-"let tokyonight_style = "light"
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-"let ayucolor="dark"   " for dark version of theme
+" Vim Dashboard
+" Default value is clap
+let g:dashboard_default_executive ='fzf'
+"Custom shortcuts
+let g:dashboard_custom_shortcut={
+\ 'last_session'       : '<leader>sl',
+\ 'find_history'       : '<leader>fh',
+\ 'find_file'          : '<leader>ff',
+\ 'new_file'           : '<leader>cn',
+\ 'change_colorscheme' : '<leader>fc',
+\ 'find_word'          : '<leader>fw',
+\ 'book_marks'         : '<leader>fb',
+\ }
+" header
+let g:dashboard_custom_header = [
+\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+\]
+let g:dashboard_custom_section={
+            \ 'book_marks': {
+                \ 'description': [' Jump to bookmarks                 <leader>fm'],
+                \ 'command': 'DashboardJumpMark' },
+            \ 'find_file': {
+                \ 'description': [' Find File                         <leader>ff'],
+                \ 'command': 'DashboardFindFile' },
+            \ 'new_file': {
+                \ 'description': [' New File                          <leader>cn'],
+                \ 'command': 'DashboardNewFile' },
+            \ 'init': {
+                \ 'description': [' Jump to init                      <leader>ev'],
+                \ 'command': 'edit $MYVIMRC' },
+            \ 'last_session': {
+                \ 'description': [' Last Session                      <leader>sl'],
+                \ 'command': 'SessionLoad' },
+            \ 'find_history': {
+                \ 'description': ['ﭯ Recently opened files              <leader>fh'],
+                \ 'command': 'DashboardFindHistory' },
+            \ 'open_browser': {
+                \ 'description': [' Open File Browser                 <leader>, '],
+                \ 'command': 'NNN' },
+            \ 'select_wiki': {
+                \ 'description': [' Select Wiki                       <leader>ws'],
+                \ 'command': 'VimwikiUISelect' }
+  \ }
 "}}}
 
 " Put all the highlight settings here
 "{{{
 " launch colorscheme
 colorscheme molokai
-" enable transparency with colorscheme
-"hi Normal guibg=NONE
-" set cursorline
-"hi cursorline gui=none guifg=none guibg=grey25
-" set cursorcolumn
-"hi cursorcolumn gui=none guifg=none guibg=grey40
-" set floating window border color
-hi FloatBorder guifg=#d79921
 " set error message
 hi Error guifg=red
 "}}}
@@ -134,8 +168,6 @@ nnoremap <silent> <C-p> "+p
 nnoremap <silent> Y y$
 " View the current buffers
 "nnoremap <silent> <leader>b :ls<CR>:buffer<SPACE>
-" (using fzf)
-nnoremap <silent> <leader>b :Buffers<CR>
 " Switch to prev/next buffer
 nnoremap <silent> <leader>n :bnext<CR>
 nnoremap <silent> <leader>N :bprevious<CR>
@@ -193,16 +225,20 @@ nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:c
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
 
-nnoremap <silent> <leader>f :Files<CR>
+" FZF remappings
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
+nnoremap <silent> <leader>fh :History<CR>
+nnoremap <silent> <leader>fw :Rg<CR>
+nnoremap <silent> <leader>fc :Colors<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 command! Myscripts :Files /home/ld/.scripts
 
-"" mappings for dashboard.nvim
-" nmap <Leader>ss :<C-u>SessionSave<CR>
-" nmap <Leader>sl :<C-u>SessionLoad<CR>
-" nnoremap <silent> <Leader>fh :DashboardFindHistory<CR>
-" nnoremap <silent> <Leader>ff :DashboardFindFile<CR>
-" nnoremap <silent> <Leader>tc :DashboardChangeColorscheme<CR>
-" nnoremap <silent> <Leader>fa :DashboardFindWord<CR>
-" nnoremap <silent> <Leader>fb :DashboardJumpMark<CR>
-" nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+" Vim Dashboard remapping
+nmap <Leader>ss :<C-u>SessionSave<CR>
+nmap <Leader>sl :<C-u>SessionLoad<CR>
+nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
+" save session
+"nnoremap <silent> <leader>ss :mksession! /home/ld/.cache/vim/session/default.vim<CR>:echo "Session saved"<CR>
+"nnoremap <silent> <leader>ll :source /home/ld/.cache/vim/session/default.vim<CR>:echo "Session restored"<CR>
 "}}}

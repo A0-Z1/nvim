@@ -13,6 +13,7 @@ if exists('g:GtkGuiLoaded')
     vmap <silent> <C-ENTER> <Plug>SendSelection
     nnoremap <silent> <M-,> gT
     nnoremap <silent> <M-.> gt
+    nnoremap <silent> <Home> :Dashboard<CR>
 endif                                                 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
