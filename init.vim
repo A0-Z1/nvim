@@ -53,21 +53,10 @@ call plug#begin('~/.local.share/nvim/plugged')
 Plug 'tpope/vim-surround' " easy bracket managing
 Plug 'tpope/vim-fugitive' " Add integration with Git
 Plug 'neovim/nvim-lspconfig' " LSP
-Plug 'ervandew/supertab' " TAB completion
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'chrisbra/csv.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/fzf.vim'
-Plug 'glepnir/dashboard-nvim'
-"" colorschemes
-"Plug 'dracula/vim', { 'as': 'dracula' }
-"Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-"Plug 'ayu-theme/ayu-vim' " or other package manager
-"Plug 'savq/melange'
-"Plug 'joshdick/onedark.vim'
-"Plug 'chriskempson/base16-vim'
-"Plug 'kyoz/purify', { 'rtp': 'vim' }
-"Plug 'mangeshrex/uwu.vim'
 Plug 'tomasr/molokai'
 
 call plug#end()
@@ -75,16 +64,6 @@ call plug#end()
 
 " Put all the plugin settings here
 "{{{
-" Dashboard
-let g:dashboard_default_executive = "fzf"
-let g:dashboard_custom_header = [
-\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-\]
 " NetRw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -97,18 +76,6 @@ lua require('lspconfig').r_language_server.setup{}
 lua require('lspconfig').texlab.setup{}
 " disable virtual text by default
 lua vim.diagnostic.config({virtual_text = false})
-" supertab
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 1
-augroup supertab
-    autocmd!
-    autocmd FileType tex let b:SuperTabContextTextMemberPatterns = ['\\', '{']
-    autocmd FileType html let b:SuperTabContextTextMemberPatterns = ['</', '<']
-    autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
-    autocmd FileType sh let b:SuperTabContextTextMemberPatterns = ['\$', '(']
-    autocmd FileType r let b:SuperTabContextTextMemberPatterns = ['\.', '\$', ':']
-augroup END
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Wikis/Personal',
       \ 'path_html': '~/Wikis/Personal/html/',
