@@ -137,14 +137,17 @@ let g:dashboard_custom_section={
                 \ 'description': [' Last Session                      <leader>sl'],
                 \ 'command': 'SessionLoad' },
             \ 'find_history': {
-                \ 'description': ['ﭯ Recently opened files              <leader>fh'],
+                \ 'description': ['ﭯ Recently opened files             <leader>fh'],
                 \ 'command': 'DashboardFindHistory' },
             \ 'open_browser': {
                 \ 'description': [' Open File Browser                 <leader>, '],
                 \ 'command': 'NNN' },
             \ 'select_wiki': {
                 \ 'description': [' Select Wiki                       <leader>ws'],
-                \ 'command': 'VimwikiUISelect' }
+                \ 'command': 'VimwikiUISelect' },
+            \ 'go_to_scripts': {
+                \ 'description': ['亮Jump to my scripts                <leader>fs'],
+                \ 'command': 'Myscripts' },
   \ }
 "}}}
 
@@ -231,8 +234,8 @@ nnoremap <silent> <leader>fm :Marks<CR>
 nnoremap <silent> <leader>fh :History<CR>
 nnoremap <silent> <leader>fw :Rg<CR>
 nnoremap <silent> <leader>fc :Colors<CR>
+nnoremap <silent> <leader>fs :Files ~/.scripts<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-command! Myscripts :Files /home/ld/.scripts
 
 " Vim Dashboard remapping
 nmap <Leader>ss :<C-u>SessionSave<CR>
