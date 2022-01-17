@@ -12,6 +12,7 @@ if exists('g:GtkGuiLoaded')
     nmap <buffer><silent> <C-ENTER> <Plug>RDSendLine
     imap <buffer><silent> <C-ENTER> <C-o><Plug>RSendLine
     let R_assign_map = '<M-->'
+    execute "inoremap <buffer><silent> <M-.> <ESC>a %>% "
 endif                                                 
 " LSP
 "setlocal omnifunc=v:lua.vim.lsp.omnifunc

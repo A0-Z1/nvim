@@ -147,7 +147,7 @@ let g:dashboard_custom_section={
                 \ 'command': 'VimwikiUISelect' },
             \ 'go_to_scripts': {
                 \ 'description': ['亮Jump to my scripts                <leader>fs'],
-                \ 'command': 'Myscripts' },
+                \ 'command': 'Files /home/ld/.scripts' },
   \ }
 "}}}
 
