@@ -85,6 +85,7 @@ lua vim.diagnostic.config({virtual_text = false})
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
+let g:SuperTabRetainCompletionDuration = 'completion'
 augroup supertab
     autocmd!
     autocmd FileType tex let b:SuperTabContextTextMemberPatterns = ['\\', '{']
@@ -193,7 +194,7 @@ lua << EOF
 EOF
 
 " indent line filetypes
-let g:indent_blankline_filetype = ['python', 'r', 'sh', 'bash', 'lua', 'rust', 'c', 'html', 'css', 'javascript']
+let g:indent_blankline_filetype = ['python', 'r', 'sh', 'bash', 'vim', 'lua', 'rust', 'c', 'html', 'css', 'javascript']
 let g:indent_blankline_show_end_of_line = v:true
 let g:indent_blankline_max_indent_increase = 1
 "let g:indent_blankline_show_first_indent_level = v:false
@@ -272,6 +273,8 @@ nnoremap <silent> <leader>m :make %<CR>
 nnoremap <silent> <F2> :Lexplore<CR>
 " change directory to local file
 nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:cd %:h<CR>
+" exit from completion without modifying the word with ESC
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 "" commands
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
