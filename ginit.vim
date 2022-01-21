@@ -14,6 +14,7 @@ if exists('g:GtkGuiLoaded')
     nnoremap <silent> <M-,> gT
     nnoremap <silent> <M-.> gt
     nnoremap <silent> <Home> :Dashboard<CR>
+    nnoremap <silent> <C-S-t> :tabnew<CR>
 endif                                                 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -5,6 +5,8 @@ setlocal nowrap
 " only with Nvim-R
 let R_rconsole_width = 54
 let R_min_editor_width = 18
+let R_objbr_place = 'script,below'
+
 nmap <buffer><silent> <localleader>sr <Plug>RSaveClose
 " for GUI instance
 if exists('g:GtkGuiLoaded')
