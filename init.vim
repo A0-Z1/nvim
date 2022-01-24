@@ -56,7 +56,7 @@ Plug 'tpope/vim-fugitive' " Add integration with Git
 Plug 'neovim/nvim-lspconfig' " LSP
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'chrisbra/csv.vim'
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', {'branch': 'dev'}
 Plug 'junegunn/fzf.vim'
 Plug 'tomasr/molokai'
 Plug 'glepnir/dashboard-nvim'
@@ -84,7 +84,7 @@ lua vim.diagnostic.config({virtual_text = false})
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 1
+"let g:SuperTabCrMapping = 1
 let g:SuperTabRetainCompletionDuration = 'completion'
 augroup supertab
     autocmd!
@@ -115,6 +115,9 @@ let g:vimwiki_list = [{'path': '~/Wikis/Personal',
       \ 'template_path': '~/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'}]
+let g:vimwiki_key_mappings = {
+      \ 'table_mappings': 0
+      \}
 " Vim Dashboard
 " Default value is clap
 let g:dashboard_default_executive ='fzf'
@@ -274,7 +277,9 @@ nnoremap <silent> <F2> :Lexplore<CR>
 " change directory to local file
 nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:cd %:h<CR>
 " exit from completion without modifying the word with ESC
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <ESC> pumvisible() ? "\<C-e>" : "\<Esc>"
+" confirm completion with CR
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 "" commands
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)

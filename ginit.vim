@@ -8,9 +8,9 @@ if exists('g:GtkGuiLoaded')
     call rpcnotify(1, 'Gui', 'Font', 'Hack Nerd Font 12')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     " send lines to terminal (only valid in gvim apparently)
-    nmap <silent> <C-ENTER> <Plug>SendLine
-    imap <silent> <C-ENTER> <C-o><Plug>SendLine
-    vmap <silent> <C-ENTER> <Plug>SendSelection
+    nmap <silent> <C-ENTER> <Plug>SendDownLine
+    imap <silent> <C-ENTER> <C-o><Plug>SendDownLine
+    vmap <silent> <C-ENTER> <Plug>SendDownSelection
     nnoremap <silent> <M-,> gT
     nnoremap <silent> <M-.> gt
     nnoremap <silent> <Home> :Dashboard<CR>

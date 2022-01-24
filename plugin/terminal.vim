@@ -222,7 +222,7 @@ nmap <silent> <leader>th <Plug>CreateHorTerm
 nmap <silent> <leader>tv <Plug>CreateVertTerm
 nmap <silent> <leader>TT <Plug>CreateDynamicTerm
 nmap <silent> <leader>tT <Plug>CreateDynamicCons
-nmap <silent> <leader>td <Plug>CreateDynamicDebugger
+nmap <silent> <leader>tD <Plug>CreateDynamicDebugger
 nmap <silent> <leader>tt <Plug>ToggleTerminal
 nmap <silent> <leader>tk <Plug>KillTerminal
 
@@ -230,6 +230,8 @@ nmap <silent> <leader>tk <Plug>KillTerminal
 " but if there is no terminal, send a warning
 nmap <silent> <leader>ts <Plug>SendLine
 vmap <silent> <leader>ts <Plug>SendSelection
+nmap <silent> <leader>td <Plug>SendDownLine
+vmap <silent> <leader>td <Plug>SendDownSelection
 
 nnoremap <silent> <Plug>CreateHorTerm :call CreateTerm("hor", <SID>Interpreter())<CR>
 nnoremap <silent> <Plug>CreateVertTerm :call CreateTerm("vert", <SID>Interpreter())<CR>
@@ -240,4 +242,6 @@ nnoremap <silent> <Plug>ToggleTerminal :call ToggleTerm()<CR>
 nnoremap <silent> <Plug>KillTerminal :call KillTerm()<CR>
 nnoremap <silent> <Plug>SendLine :call <SID>CurrentLine()<CR>
 vnoremap <silent> <Plug>SendSelection :<C-U>call <SID>CurrentSel()<CR>
+nnoremap <silent> <Plug>SendDownLine :call <SID>CurrentLine()<CR>j
+vnoremap <silent> <Plug>SendDownSelection :<C-U>call <SID>CurrentSel()<CR>j
 "}}}
