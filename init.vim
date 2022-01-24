@@ -86,6 +86,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "let g:SuperTabCrMapping = 1
 let g:SuperTabRetainCompletionDuration = 'completion'
+let g:SuperTabContextTextOmniPrecedence = ['&omnifunc', '&completefunc']
 augroup supertab
     autocmd!
     autocmd FileType tex let b:SuperTabContextTextMemberPatterns = ['\\', '{']
@@ -93,6 +94,7 @@ augroup supertab
     autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
     autocmd FileType sh,bash let b:SuperTabContextTextMemberPatterns = ['\$', '(']
     autocmd FileType r,rmd let b:SuperTabContextTextMemberPatterns = ['\.', '\$', ':']
+    autocmd FileType vimwiki let b:SuperTabContextTextMemberPatterns = ['\[', '#']
 augroup END
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Wikis/Personal',
