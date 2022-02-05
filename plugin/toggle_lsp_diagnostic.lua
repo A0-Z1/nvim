@@ -1,5 +1,5 @@
 -- this toggles virtual text into floating
--- window. 
+-- window.
 vim.g.virtual_active = false
 function _G.toggle_diagnostics()
   if vim.g.virtual_active then

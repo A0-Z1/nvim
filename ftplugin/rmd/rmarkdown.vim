@@ -21,6 +21,9 @@ let R_pdfviewer = "evince"
 nmap <buffer><silent> <C-up> <Plug>RPreviousRChunk
 nmap <buffer><silent> <C-down> <Plug>RNextRChunk
 nmap <buffer><silent> <localleader>sr <Plug>RSaveClose
+
+" for python integration
+inoremap <buffer><silent> `p ```{python}<CR>```<up><ESC>f}i
 " for GUI instance
 if exists('g:GtkGuiLoaded')
     vmap <buffer><silent> <C-ENTER> <Plug>RDSendSelection

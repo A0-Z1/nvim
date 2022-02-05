@@ -10,7 +10,7 @@ function! s:Set_options()
                 \ 'height': height,
                 \ 'anchor': 'NW',
                 \ 'col': (ui.width/2) - (width/2),
-                \ 'row': (ui.height/2) - (height/2),
+                \ 'row': ((ui.height-4)/2) - (height/2),
                 \ 'style': 'minimal',
                 \ 'border': 'rounded',
                 \ }
@@ -58,8 +58,12 @@ function! TODO()
         call <SID>LastChecked()
     endif
 
+    let Colors = g:colors_name
+    hi TODOBorder guifg=grey40
+    call nvim_win_set_option(0, 'winhl', 'Normal:Colors,FloatBorder:TODOBorder')
+
 endfunction
 
-nmap <silent> <leader>T <Plug>TodoList
-
+nmap <silent> <leader>to <Plug>SpawnTODO
+nnoremap <silent> <Plug>SpawnTODO :call TODO()<CR>
 command! TODO :call TODO()

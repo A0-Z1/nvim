@@ -220,8 +220,8 @@ augroup END
 " since window resizing only takes integers.
 nmap <silent> <leader>th <Plug>CreateHorTerm
 nmap <silent> <leader>tv <Plug>CreateVertTerm
-nmap <silent> <leader>TT <Plug>CreateDynamicTerm
-nmap <silent> <leader>tT <Plug>CreateDynamicCons
+nmap <silent> <leader>tT <Plug>CreateDynamicTerm
+nmap <silent> <leader>TT <Plug>CreateDynamicCons
 nmap <silent> <leader>tD <Plug>CreateDynamicDebugger
 nmap <silent> <leader>tt <Plug>ToggleTerminal
 nmap <silent> <leader>tk <Plug>KillTerminal

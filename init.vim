@@ -51,34 +51,39 @@ let g:python3_host_prog = '~/.venv/neovim/bin/python'
 "{{{
 call plug#begin('~/.local.share/nvim/plugged')
 
-Plug 'tpope/vim-surround' " easy bracket managing
-Plug 'tpope/vim-fugitive' " Add integration with Git
-Plug 'neovim/nvim-lspconfig' " LSP
-Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
-Plug 'chrisbra/csv.vim'
-Plug 'vimwiki/vimwiki', {'branch': 'dev'}
-Plug 'junegunn/fzf.vim'
-Plug 'tomasr/molokai'
-Plug 'glepnir/dashboard-nvim'
-Plug 'folke/zen-mode.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'ervandew/supertab'
+Plug 'tpope/vim-surround'                       " easy bracket managing
+Plug 'tpope/vim-fugitive'                       " Add integration with Git
+Plug 'tpope/vim-commentary' " easy comment stuff
+Plug 'neovim/nvim-lspconfig'                    " LSP
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}    " R develop
+Plug 'chrisbra/csv.vim'                         " csv editing
+Plug 'vimwiki/vimwiki', {'branch': 'dev'}       " wikis
+Plug 'junegunn/fzf.vim'                         " fzf integration
+Plug 'tomasr/molokai'                           " colorscheme
+Plug 'glepnir/dashboard-nvim'                   " startup screen
+Plug 'folke/zen-mode.nvim'                      " focus mode
+Plug 'lukas-reineke/indent-blankline.nvim'      " indentation guides
+Plug 'ervandew/supertab'                        " tab completion
+Plug 'goerz/jupytext.vim'                       " jupyter notebook integration
 
 call plug#end()
 "}}}
 
 " Put all the plugin settings here
 "{{{
+" jupytext settings
+let g:jupytext_fmt = 'py'
+let g:jupytext_command = '/home/ld/.venv/neovim/bin/jupytext'
+" nvim-R
+let g:markdown_fenced_languages = ['r', 'python']
+let g:rmd_fenced_languages = ['r', 'python']
 " NetRw
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 25
 "" LSP
-lua require('lspconfig').pylsp.setup{}
-lua require('lspconfig').bashls.setup{}
 lua require('lspconfig').r_language_server.setup{}
-lua require('lspconfig').texlab.setup{}
 " disable virtual text by default
 lua vim.diagnostic.config({virtual_text = false})
 " supertab
@@ -93,28 +98,29 @@ augroup supertab
     autocmd FileType html,css,javascript let b:SuperTabContextTextMemberPatterns = ['</', '<']
     autocmd FileType python let b:SuperTabContextTextMemberPatterns = ['\.', '@']
     autocmd FileType sh,bash let b:SuperTabContextTextMemberPatterns = ['\$', '(']
-    autocmd FileType r,rmd let b:SuperTabContextTextMemberPatterns = ['\.', '\$', ':']
-    autocmd FileType vimwiki let b:SuperTabContextTextMemberPatterns = ['\[', '#']
+    autocmd FileType r,rmd let b:SuperTabContextTextMemberPatterns = ['\.', '\$', ':', '@']
+    autocmd FileType vimwiki let b:SuperTabContextTextMemberPatterns = ['\[', '#', ':']
 augroup END
 " vimwiki
-let g:vimwiki_list = [{'path': '~/Wikis/Personal',
-      \ 'path_html': '~/Wikis/Personal/html/',
-      \ 'template_path': '~/Wikis/templates/',
+let g:vimwiki_toc_link_format = 1
+let g:vimwiki_list = [{'path': '~/Desktop/Wikis/Personal',
+      \ 'path_html': '~/Desktop/Wikis/Personal/html/',
+      \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'},
-      \ {'path': '~/Wikis/Machine\ Learning',
-      \ 'path_html': '~/Wikis/Machine\ Learning/html/',
-      \ 'template_path': '~/Wikis/templates/',
+      \ {'path': '~/Desktop/Wikis/Machine\ Learning',
+      \ 'path_html': '~/Desktop/Wikis/Machine\ Learning/html/',
+      \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'},
-      \ {'path': '~/Wikis/Coding',
-      \ 'path_html': '~/Wikis/Coding/html/',
-      \ 'template_path': '~/Wikis/templates/',
+      \ {'path': '~/Desktop/Wikis/Coding',
+      \ 'path_html': '~/Desktop/Wikis/Coding/html/',
+      \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'},
-      \ {'path': '~/Wikis/Work',
-      \ 'path_html': '~/Wikis/Work/html/',
-      \ 'template_path': '~/Wikis/templates/',
+      \ {'path': '~/Desktop/Wikis/Work',
+      \ 'path_html': '~/Desktop/Wikis/Work/html/',
+      \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'}]
 let g:vimwiki_key_mappings = {

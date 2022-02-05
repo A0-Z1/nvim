@@ -9,5 +9,9 @@ nnoremap <buffer><silent> <localleader>h :call Redir("!pydoc ".expand("<cword>")
 vnoremap <buffer><silent> <localleader>h :<C-U>call Redir("!pydoc ".Get_visual_selection())<CR>
 nnoremap <buffer><silent> <localleader>pp :call SendCmd('print('.expand("<cword>").')'."\n")<CR>
 vnoremap <buffer><silent> <localleader>pp :call SendCmd('print('.Get_visual_selection().')'."\n")<CR>
-" LSP
-"setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+command! Notebook !/home/ld/.venv/neovim/bin/jupytext --update --to notebook %
+nnoremap <buffer><silent> <localleader>jn :Notebook<CR>
+
+nnoremap <silent><buffer> <C-down> :call NextChunk()<CR>
+nnoremap <silent><buffer> <C-up> :call PrevChunk()<CR>
