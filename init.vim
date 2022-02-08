@@ -65,6 +65,8 @@ Plug 'folke/zen-mode.nvim'                      " focus mode
 Plug 'lukas-reineke/indent-blankline.nvim'      " indentation guides
 Plug 'ervandew/supertab'                        " tab completion
 Plug 'goerz/jupytext.vim'                       " jupyter notebook integration
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 "}}}
@@ -77,11 +79,13 @@ let g:jupytext_command = '/home/ld/.venv/neovim/bin/jupytext'
 " nvim-R
 let g:markdown_fenced_languages = ['r', 'python']
 let g:rmd_fenced_languages = ['r', 'python']
-" NetRw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_winsize = 25
+" " NetRw
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_winsize = 25
+" NerdTree
+
 "" LSP
 lua require('lspconfig').r_language_server.setup{}
 " disable virtual text by default
@@ -115,6 +119,11 @@ let g:vimwiki_list = [{'path': '~/Desktop/Wikis/Personal',
       \ 'template_default': 'default'},
       \ {'path': '~/Desktop/Wikis/Coding',
       \ 'path_html': '~/Desktop/Wikis/Coding/html/',
+      \ 'template_path': '~/Desktop/Wikis/templates/',
+      \ 'template_ext': '.html',
+      \ 'template_default': 'default'},
+      \ {'path': '~/Desktop/Wikis/Statistics',
+      \ 'path_html': '~/Desktop/Wikis/Statistics/html/',
       \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'},
@@ -281,13 +290,15 @@ nnoremap <silent> <leader>ql :clast<CR>
 " compile
 nnoremap <silent> <leader>m :make %<CR>
 " Project drawer
-nnoremap <silent> <F2> :Lexplore<CR>
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 " change directory to local file
 nnoremap <silent> <leader>cd :echom "Changing directory to ".expand("%:h")<CR>:cd %:h<CR>
 " exit from completion without modifying the word with ESC
 inoremap <expr> <ESC> pumvisible() ? "\<C-e>" : "\<Esc>"
+cnoremap <expr> <ESC> pumvisible() ? "\<C-e>" : "\<C-c>"
 " confirm completion with CR
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 "" commands
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
@@ -305,7 +316,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 
 " Vim Dashboard remapping
 nmap <Leader>ss :<C-u>SessionSave<CR>
-nmap <Leader>sl :<C-u>SessionLoad<CR>
+nmap <Leader>sl :<C-u>SessionLoad
 nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 " save session
 "nnoremap <silent> <leader>ss :mksession! /home/ld/.cache/vim/session/default.vim<CR>:echo "Session saved"<CR>

@@ -10,7 +10,7 @@ hi Message guifg=orange
 " id of terminal job
 let t:term_id = -1
 " id of terminal buffer
-let t:buf = -1
+let t:term_buf = -1
 " New terminal window ratio size
 let g:window_ratio_vert = 0.35
 let g:window_ratio_hor = 0.3
@@ -25,18 +25,19 @@ let g:switch_to_horizontal = 100
 " create horizontal terminal
 function! s:HorTerm(cmd)
     " if terminal does not exist, create it, with specified proportions
-    if t:buf ==# -1
+    if t:term_buf ==# -1
         exec float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).'new | call termopen("' . a:cmd . '")'
         " determine terminal id and buffer
         let t:term_id = b:terminal_job_id
-        let t:buf = bufnr()
+        let t:term_buf = bufnr()
         " ESC goes to normal mode, but only for this kind of terminal
         tnoremap <buffer><silent> <ESC> <C-\><C-n>
         " jump to original window
         exec "wincmd p | stopinsert"
     else
         " if it exists, open current iteration
-        exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:buf
+        exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:term_buf
+        exec "normal! G"
         " jump to original window
         exec "wincmd p | stopinsert"
     endif
@@ -44,15 +45,16 @@ endfunction
 
 " same, but vertical
 function! s:VertTerm(cmd)
-    if t:buf ==# -1
+    if t:term_buf ==# -1
         exec float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)."vnew \| call termopen(\"" . a:cmd . "\")"
         let t:term_id = b:terminal_job_id
-        let t:buf = bufnr()
+        let t:term_buf = bufnr()
         tnoremap <buffer><silent> <ESC> <C-\><C-n>
         " jump to original window
         exec "wincmd p | stopinsert"
     else
-        exec 'vert sbuffer '.t:buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+        exec 'vert sbuffer '.t:term_buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+        exec "normal! G"
         " jump to original window
         exec "wincmd p | stopinsert"
     endif
@@ -61,7 +63,7 @@ endfunction
 " create terminal
 function! CreateTerm(layout, cmd)
     " if window's open, send warning
-    let l:winbuf = bufwinnr(t:buf)
+    let l:winbuf = bufwinnr(t:term_buf)
     if l:winbuf != -1
         echohl Warning | echom "A terminal is already open!" | echohl None
         return
@@ -78,7 +80,7 @@ endfunction
 " create terminal dynamically
 function! CreateTermDynamic(cmd)
     " if window's open, send warning
-    let l:winbuf = bufwinnr(t:buf)
+    let l:winbuf = bufwinnr(t:term_buf)
     if l:winbuf != -1
         echohl Warning | echom "A terminal is already open!" | echohl None
         return
@@ -98,9 +100,9 @@ function! KillTerm()
         echohl Warning | echom "No terminal active!" | echohl None
     else
         call chanclose(t:term_id)
-        exec 'bd! '.t:buf
+        exec 'bd! '.t:term_buf
         let t:term_id = -1
-        let t:buf = -1
+        let t:term_buf = -1
         echohl Message | echom "Terminal Killed" | echohl None
     endif
 endfunction
@@ -110,14 +112,16 @@ function! ToggleTerm()
     if t:term_id ==# -1
         call CreateTermDynamic(<SID>Interpreter())
     else
-        let win_numb = bufwinnr(t:buf)
+        let win_numb = bufwinnr(t:term_buf)
         if win_numb ==# -1
             if nvim_list_uis()[0].width >= g:switch_to_horizontal
-                exec 'vert sbuffer '.t:buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+                exec 'vert sbuffer '.t:term_buf.' | vertical resize'.float2nr(nvim_list_uis()[0].width*g:window_ratio_vert)
+                exec "normal! G"
                 " jump to original window
                 exec "wincmd p | stopinsert"
             else
-                exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:buf
+                exec 'sbuffer +resize'.float2nr(nvim_list_uis()[0].height*g:window_ratio_hor).' '.t:term_buf
+                exec "normal! G"
                 " jump to original window
                 exec "wincmd p | stopinsert"
             endif
@@ -136,14 +140,75 @@ function! SendCmd(cmd)
     endif
 endfunction
 
+function! ShowLastLine()
+    execute bufwinnr(t:term_buf) . "wincmd w"
+    execute "normal! G"
+    execute "wincmd p"
+    stopinsert
+endfunction
+
 " send current line to the terminal
-function! s:CurrentLine()
+function! CurrentLine()
     call SendCmd(getline(".")."\n")
+    if bufwinnr(t:term_buf) != -1
+        call ShowLastLine()
+    endif
 endfunction
 
 " send current selection to the terminal
-function! s:CurrentSel()
+function! CurrentSel()
     call SendCmd(Get_visual_selection()."\n")
+    if bufwinnr(t:term_buf) != -1
+        call ShowLastLine()
+    endif
+endfunction
+
+function! DownLine()
+    if t:term_id ==# -1
+        echohl Warning | echom "No terminal active!" | echohl None
+    else
+        call CurrentLine()
+        execute "normal! j"
+    endif
+endfunction
+
+function! DownSelection()
+    if t:term_id ==# -1
+        stopinsert
+        echohl Warning | echom "No terminal active!" | echohl None
+    else
+        call CurrentSel()
+        execute "normal! j"
+    endif
+endfunction
+
+function! SendDownLine_Python()
+    if ! (getline(".") =~ "^    ") && ! (getline(".") =~ ":$")
+        call DownLine()
+    else
+        call DownLine()
+        while 1
+            while getline(".") == "" && line(".") != line("$")
+                execute "normal! j"
+            endwhile
+
+            if getline(".") != "" && ! (getline(".") =~ "^    ")
+                call SendCmd("\n")
+                break
+            endif
+
+            if line(".") == line("$")
+                if getline(".") != ""
+                    call CurrentLine()
+                endif
+                call SendCmd("\n")
+                break
+            endif
+
+            call DownLine()
+
+        endwhile
+    endif
 endfunction
 
 " Depending on the file, return a different interpreter
@@ -188,7 +253,7 @@ augroup terminal_buffer
 
     " When you open new tab, set t:term_id and buf to -1
     autocmd TabNew * let t:term_id=-1
-    autocmd TabNew * let t:buf=-1
+    autocmd TabNew * let t:term_buf=-1
 
     " when move to terminal window, enter into insert mode
     autocmd TermOpen,BufEnter * if &buftype ==# "terminal" | startinsert | endif
@@ -240,8 +305,8 @@ nnoremap <silent> <Plug>CreateDynamicCons :call CreateTermDynamic("bash")<CR>
 nnoremap <silent> <Plug>CreateDynamicDebugger :call CreateTermDynamic(<SID>Debugger())<CR>
 nnoremap <silent> <Plug>ToggleTerminal :call ToggleTerm()<CR>
 nnoremap <silent> <Plug>KillTerminal :call KillTerm()<CR>
-nnoremap <silent> <Plug>SendLine :call <SID>CurrentLine()<CR>
-vnoremap <silent> <Plug>SendSelection :<C-U>call <SID>CurrentSel()<CR>
-nnoremap <silent> <Plug>SendDownLine :call <SID>CurrentLine()<CR>j
-vnoremap <silent> <Plug>SendDownSelection :<C-U>call <SID>CurrentSel()<CR>j
+nnoremap <silent> <Plug>SendLine :call CurrentLine()<CR>
+vnoremap <silent> <Plug>SendSelection :<C-U>call CurrentSel()<CR>
+nnoremap <silent> <Plug>SendDownLine :call DownLine()<CR>
+vnoremap <silent> <Plug>SendDownSelection :<C-U>call DownSelection()<CR>
 "}}}

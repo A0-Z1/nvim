@@ -15,3 +15,7 @@ nnoremap <buffer><silent> <localleader>jn :Notebook<CR>
 
 nnoremap <silent><buffer> <C-down> :call NextChunk()<CR>
 nnoremap <silent><buffer> <C-up> :call PrevChunk()<CR>
+
+if exists('g:GtkGuiLoaded')
+    nnoremap <buffer><silent> <C-ENTER> :call SendDownLine_Python()<CR>
+endif                                                 
