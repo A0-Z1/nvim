@@ -183,7 +183,9 @@ function! DownSelection()
 endfunction
 
 function! SendDownLine_Python()
-    if ! (getline(".") =~ "^    ") && ! (getline(".") =~ ":$")
+    if t:term_id ==# -1
+        echohl Warning | echom "No terminal active!" | echohl None
+    elseif ! (getline(".") =~ "^    ") && ! (getline(".") =~ ":$")
         call DownLine()
     else
         call DownLine()

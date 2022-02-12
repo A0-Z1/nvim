@@ -53,11 +53,11 @@ call plug#begin('~/.local.share/nvim/plugged')
 
 Plug 'tpope/vim-surround'                       " easy bracket managing
 Plug 'tpope/vim-fugitive'                       " Add integration with Git
-Plug 'tpope/vim-commentary' " easy comment stuff
+Plug 'tpope/vim-commentary'                     " easy comment stuff
 Plug 'neovim/nvim-lspconfig'                    " LSP
 Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}    " R develop
 Plug 'chrisbra/csv.vim'                         " csv editing
-Plug 'vimwiki/vimwiki', {'branch': 'dev'}       " wikis
+Plug 'A0-Z1/vimwiki', {'branch': 'quote_fix'}   " wikis
 Plug 'junegunn/fzf.vim'                         " fzf integration
 Plug 'tomasr/molokai'                           " colorscheme
 Plug 'glepnir/dashboard-nvim'                   " startup screen
@@ -106,6 +106,7 @@ augroup supertab
     autocmd FileType vimwiki let b:SuperTabContextTextMemberPatterns = ['\[', '#', ':']
 augroup END
 " vimwiki
+"let g:vimwiki_folding = 'expr'
 let g:vimwiki_toc_link_format = 1
 let g:vimwiki_list = [{'path': '~/Desktop/Wikis/Personal',
       \ 'path_html': '~/Desktop/Wikis/Personal/html/',
