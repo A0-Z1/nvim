@@ -1,7 +1,7 @@
 hi User1 gui=bold,reverse guifg=#455354 guibg=#fd971f
 hi User2 gui=bold,reverse guifg=#455354 guibg=#A6e22e
 hi User3 gui=italic,reverse guifg=#455354 guibg=#89CFF0
-hi User4 gui=reverse guifg=#455354 guibg=#f92672
+hi User4 gui=bold,reverse guifg=#455354 guibg=#ae81ff
 
 " Display Git branching
 function! Branches()

@@ -217,7 +217,7 @@ lua << EOF
 EOF
 
 " indent line filetypes
-let g:indent_blankline_filetype_exclude = ['vimwiki', 'text', 'markdown', 'dashboard', 'csv']
+let g:indent_blankline_filetype_exclude = ['vimwiki', 'text', 'markdown', 'dashboard', 'csv', 'nerdtree', 'netrw']
 let g:indent_blankline_max_indent_increase = 1
 let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_show_current_context_start = v:true
