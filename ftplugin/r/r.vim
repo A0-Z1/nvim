@@ -1,6 +1,6 @@
 """ R commands and properties
 " lookup program
-"setlocal keywordprg=Rdoc
+setlocal keywordprg=Rdoc
 setlocal nowrap
 " only with Nvim-R
 let R_rconsole_width = 54

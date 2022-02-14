@@ -31,7 +31,7 @@ endif
 "" Enable Mouse
 "set mouse=a
 "" show filename in title
-""set title
+"set title
 "
 "
 "" Set Editor Font
@@ -47,7 +47,7 @@ endif
 "
 "" Disable GUI Popupmenu
 "if exists(':GuiPopupmenu')
-"    GuiPopupmenu 0
+"    GuiPopupmenu 1
 "endif
 "
 "" Enable GUI ScrollBar
@@ -61,4 +61,10 @@ endif
 "xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
 "snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 "
-"
+"nmap <silent> <C-ENTER> <Plug>SendDownLine
+"imap <silent> <C-ENTER> <C-o><Plug>SendLine
+"vmap <silent> <C-ENTER> <Plug>SendDownSelection
+"nnoremap <silent> <M-,> gT
+"nnoremap <silent> <M-.> gt
+"nnoremap <silent> <Home> :Dashboard<CR>
+"nnoremap <silent> <C-S-t> :tabnew<CR>

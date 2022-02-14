@@ -5,17 +5,18 @@ local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-    
-    ---- Enable completion triggered by <c-x><c-o>
+
+    -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-    
+
     -- Mappings.
     local opts = { noremap=true, silent=true }
-    
+
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', '<C-h>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('v', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     buf_set_keymap('n', '[w', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
@@ -35,7 +36,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pylsp', 'bashls', 'texlab', 'sumneko_lua' }
+local servers = { 'pylsp', 'bashls', 'texlab', 'sumneko_lua'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -44,3 +45,29 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
+-- do it specifically for R (remove the completion)
+local on_attach_R = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('v', '<C-k>', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '[w', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']w', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+end
+
+nvim_lsp["r_language_server"].setup {
+    on_attach = on_attach_R,
+    flags = {
+        debounce_text_changes = 150,
+    }
+}
