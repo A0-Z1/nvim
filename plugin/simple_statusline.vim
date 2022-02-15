@@ -49,4 +49,4 @@ augroup netrw
 augroup END
 
 
-set statusline=%t\%h%4*%m%*%r%3*%{Spelling()}%*%1*%{Branches()}%*%=%<%2*%{TreeSitter()}%*%-14.(%l,%c%V%)\ %P
+set statusline=%t\%h%m%r%3*%{Spelling()}%*%1*%{Branches()}%*%=%<%2*%{TreeSitter()}%*%-14.(%l,%c%V%)\ %P
