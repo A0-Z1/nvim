@@ -8,7 +8,7 @@ function! Redir(cmd)
         redir END
     endif
     new
-    setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
+    setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile filetype=help
     call setline(1, split(output, "\n"))
     put! = a:cmd
     put = '----'
