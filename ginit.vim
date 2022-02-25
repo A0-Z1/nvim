@@ -28,43 +28,43 @@ endif
 """ | |\  |  __/ (_) \ V /| | | | | | |_____| |_| | |_ 
 """ |_| \_|\___|\___/ \_/ |_|_| |_| |_|      \__\_\\__|
                                                    
-"" Enable Mouse
-"set mouse=a
-"" show filename in title
-"set title
-"
-"
-"" Set Editor Font
-"if exists(':GuiFont')
-"    " Use GuiFont! to ignore font errors
-"    GuiFont Hack Nerd Font:h11
+" Enable Mouse
+set mouse=a
+" show filename in title
+set title
+
+
+" Set Editor Font
+if exists(':GuiFont')
+    " Use GuiFont! to ignore font errors
+    GuiFont Hack Nerd Font:h12
+endif
+
+"" Disable GUI Tabline
+"if exists(':GuiTabline')
+"    GuiTabline 0
 "endif
-"
-""" Disable GUI Tabline
-""if exists(':GuiTabline')
-""    GuiTabline 0
-""endif
-"
-"" Disable GUI Popupmenu
-"if exists(':GuiPopupmenu')
-"    GuiPopupmenu 1
-"endif
-"
-"" Enable GUI ScrollBar
-"if exists(':GuiScrollBar')
-"    GuiScrollBar 1
-"endif
-"
-"" Right Click Context Menu (Copy-Cut-Paste)
-"nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
-"inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
-"xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
-"snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
-"
-"nmap <silent> <C-ENTER> <Plug>SendDownLine
-"imap <silent> <C-ENTER> <C-o><Plug>SendLine
-"vmap <silent> <C-ENTER> <Plug>SendDownSelection
-"nnoremap <silent> <M-,> gT
-"nnoremap <silent> <M-.> gt
-"nnoremap <silent> <Home> :Dashboard<CR>
-"nnoremap <silent> <C-S-t> :tabnew<CR>
+
+" Disable GUI Popupmenu
+if exists(':GuiPopupmenu')
+    GuiPopupmenu 1
+endif
+
+" Enable GUI ScrollBar
+if exists(':GuiScrollBar')
+    GuiScrollBar 1
+endif
+
+" Right Click Context Menu (Copy-Cut-Paste)
+nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
+inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
+xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
+snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
+
+nmap <silent> <C-ENTER> <Plug>SendDownLine
+imap <silent> <C-ENTER> <C-o><Plug>SendLine
+vmap <silent> <C-ENTER> <Plug>SendDownSelection
+nnoremap <silent> <M-,> gT
+nnoremap <silent> <M-.> gt
+nnoremap <silent> <Home> :Dashboard<CR>
+nnoremap <silent> <C-S-t> :tabnew<CR>

@@ -25,7 +25,7 @@ nmap <buffer><silent> <localleader>sr <Plug>RSaveClose
 " for python integration
 inoremap <buffer><silent> `p ```{python}<CR>```<up><ESC>f}i
 " for GUI instance
-if exists('g:GtkGuiLoaded')
+if exists(':GuiFont')
     vmap <buffer><silent> <C-ENTER> <Plug>RDSendSelection
     nmap <buffer><silent> <C-ENTER> <Plug>RDSendLine
     imap <buffer><silent> <C-ENTER> <C-o><Plug>RSendLine

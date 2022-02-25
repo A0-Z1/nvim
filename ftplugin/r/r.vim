@@ -9,7 +9,7 @@ let R_objbr_place = 'script,below'
 
 nmap <buffer><silent> <localleader>sr <Plug>RSaveClose
 " for GUI instance
-if exists('g:GtkGuiLoaded')
+if exists(':GuiFont')
     vmap <buffer><silent> <C-ENTER> <Plug>RDSendSelection
     nmap <buffer><silent> <C-ENTER> <Plug>RDSendLine
     imap <buffer><silent> <C-ENTER> <C-o><Plug>RSendLine
