@@ -39,6 +39,10 @@ syntax on
 set listchars=eol:↴,lead:⋅,tab:<->
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+" set blinking
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+              \,a:blinkwait400-blinkoff600-blinkon900-Cursor/lCursor
+              \,sm:block-blinkwait175-blinkoff150-blinkon175
 "}}}
 
 " Put all the user-defined variables here
@@ -46,7 +50,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 " Make every .tex file become filetype latex
 let g:tex_flavor="latex"
 " enable python for virtualenvs
-let g:python3_host_prog = '~/.venv/neovim/bin/python'
+let g:python3_host_prog = '~/.miniconda3/bin/python'
 " }}}
 
 " Put all the plugins here
