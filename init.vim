@@ -147,13 +147,13 @@ let g:vimwiki_key_mappings = {
 let g:dashboard_default_executive ='fzf'
 "Custom shortcuts
 let g:dashboard_custom_shortcut={
-\ 'last_session'       : '<leader>sl',
-\ 'find_history'       : '<leader>fh',
-\ 'find_file'          : '<leader>ff',
-\ 'new_file'           : '<leader>cn',
-\ 'change_colorscheme' : '<leader>fc',
-\ 'find_word'          : '<leader>fw',
-\ 'book_marks'         : '<leader>fb',
+\ 'last_session'       : ',sl',
+\ 'find_history'       : ',fh',
+\ 'find_file'          : ',ff',
+\ 'new_file'           : ',cn',
+\ 'change_colorscheme' : ',fc',
+\ 'find_word'          : ',fw',
+\ 'book_marks'         : ',fb',
 \ }
 " header
 let g:dashboard_custom_header = [
@@ -166,31 +166,31 @@ let g:dashboard_custom_header = [
 \]
 let g:dashboard_custom_section={
             \ 'book_marks': {
-                \ 'description': [' Jump to bookmarks                 <leader>fm'],
+                \ 'description': [' Jump to bookmarks                 ,fm'],
                 \ 'command': 'DashboardJumpMark' },
             \ 'find_file': {
-                \ 'description': [' Find File                         <leader>ff'],
+                \ 'description': [' Find File                         ,ff'],
                 \ 'command': 'DashboardFindFile' },
             \ 'new_file': {
-                \ 'description': [' New File                          <leader>cn'],
+                \ 'description': [' New File                          ,cn'],
                 \ 'command': 'DashboardNewFile' },
             \ 'init': {
-                \ 'description': [' Jump to init                      <leader>ev'],
+                \ 'description': [' Jump to init                      ,ev'],
                 \ 'command': 'edit $MYVIMRC' },
             \ 'last_session': {
-                \ 'description': [' Last Session                      <leader>sl'],
+                \ 'description': [' Last Session                      ,sl'],
                 \ 'command': 'SessionLoad' },
             \ 'find_history': {
-                \ 'description': ['ﭯ Recently opened files             <leader>fh'],
+                \ 'description': ['ﭯ Recently opened files             ,fh'],
                 \ 'command': 'DashboardFindHistory' },
             \ 'open_browser': {
-                \ 'description': [' Open File Browser                 <leader>, '],
+                \ 'description': [' Open File Browser                 ,, '],
                 \ 'command': 'NNN' },
             \ 'select_wiki': {
-                \ 'description': [' Select Wiki                       <leader>ws'],
+                \ 'description': [' Select Wiki                       ,ws'],
                 \ 'command': 'VimwikiUISelect' },
             \ 'go_to_scripts': {
-                \ 'description': ['亮Jump to my scripts                <leader>fs'],
+                \ 'description': ['亮Jump to my scripts                ,fs'],
                 \ 'command': 'Files /home/ld/.scripts' },
   \ }
 
