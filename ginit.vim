@@ -64,6 +64,14 @@ snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
 nmap <silent> <C-ENTER> <Plug>SendDownLine
 imap <silent> <C-ENTER> <C-o><Plug>SendLine
 vmap <silent> <C-ENTER> <Plug>SendDownSelection
+nmap <silent> <F5> <Plug>ToggleTerminal
+vmap <silent> <F5> <C-U><Plug>ToggleTerminal
+imap <silent> <F5> <C-o><Plug>ToggleTerminal
+tmap <silent> <F5> <C-\><C-n><Plug>ToggleTerminal
+nmap <silent> <C-Del> <Plug>KillTerminal
+vmap <silent> <C-Del> <C-U><Plug>KillTerminal
+imap <silent> <C-Del> <C-o><Plug>KillTerminal
+tmap <silent> <C-Del> <C-\><C-n><Plug>KillTerminal
 nnoremap <silent> <M-,> gT
 nnoremap <silent> <M-.> gt
 nnoremap <silent> <Home> :Dashboard<CR>

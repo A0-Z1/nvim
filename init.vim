@@ -50,7 +50,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " Make every .tex file become filetype latex
 let g:tex_flavor="latex"
 " enable python for virtualenvs
-let g:python3_host_prog = '~/.miniconda3/bin/python'
+let g:python3_host_prog = '~/.venv/neovim/bin/python'
 " }}}
 
 " Put all the plugins here
@@ -134,8 +134,8 @@ let g:vimwiki_list = [{'path': '~/Desktop/Wikis/Personal',
       \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'},
-      \ {'path': '~/Desktop/Wikis/Work',
-      \ 'path_html': '~/Desktop/Wikis/Work/html/',
+      \ {'path': '~/Desktop/Wikis/Marketing',
+      \ 'path_html': '~/Desktop/Wikis/Marketing/html/',
       \ 'template_path': '~/Desktop/Wikis/templates/',
       \ 'template_ext': '.html',
       \ 'template_default': 'default'}]
@@ -351,6 +351,7 @@ cnoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 "" commands
 " Display infos about current file
 command! Infos echo "Informations about file "."'".expand("%:t")."'"."\nFile Type:\t".toupper(&filetype)."\nFile Encoding:\t".toupper(&fenc)."\nFile Format:\t".toupper(&ff)
+command! Myscripts :Files ~/.scripts
 
 " display space char
 "nnoremap <silent> <leader>ll :set list!<CR>
