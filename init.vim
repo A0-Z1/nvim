@@ -74,12 +74,15 @@ Plug 'goerz/jupytext.vim'                       " jupyter notebook integration
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'vim-scripts/dbext.vim'
 
 call plug#end()
 "}}}
 
 " Put all the plugin settings here
 "{{{
+"dbext settings
+let g:dbext_default_profile_monzo = 'type=MYSQL:user=ld:passwd=19/Matematica/96:host=a0z1.info:dbname=monzo'
 " jupytext settings
 let g:jupytext_fmt = 'py'
 let g:jupytext_command = '/home/ld/.venv/neovim/bin/jupytext'

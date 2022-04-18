@@ -68,6 +68,10 @@ nmap <silent> <F5> <Plug>ToggleTerminal
 vmap <silent> <F5> <C-U><Plug>ToggleTerminal
 imap <silent> <F5> <C-o><Plug>ToggleTerminal
 tmap <silent> <F5> <C-\><C-n><Plug>ToggleTerminal
+nmap <silent> <C-'> <Plug>ToggleTerminal
+vmap <silent> <C-'> <C-U><Plug>ToggleTerminal
+imap <silent> <C-'> <C-o><Plug>ToggleTerminal
+tmap <silent> <C-'> <C-\><C-n><Plug>ToggleTerminal
 nmap <silent> <C-Del> <Plug>KillTerminal
 vmap <silent> <C-Del> <C-U><Plug>KillTerminal
 imap <silent> <C-Del> <C-o><Plug>KillTerminal
