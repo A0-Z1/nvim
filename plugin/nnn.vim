@@ -53,9 +53,9 @@ function! s:NNNChoose(float=1)
     else
         call <SID>NNNChooser()
     endif
-    tnoremap <buffer><silent> q q<C-\><C-n>:bw!<CR>
-    tnoremap <buffer><silent> <ESC><ESC> <ESC><ESC><C-\><C-n>:bw!<CR>
-    tnoremap <buffer><silent> Q Q<C-\><C-n>:bw!<CR>
+    "tnoremap <buffer><silent> Q Q<C-\><C-n>:bw!<CR>
+    "tnoremap <buffer><silent> <C-q> q<C-\><C-n>:bw!<CR>
+    "tnoremap <buffer><silent> <ESC><ESC> <ESC><ESC><C-\><C-n>:bw!<CR>
     let Colors = g:colors_name
     hi BrowserBorder guifg=grey40
     call nvim_win_set_option(0, 'winhl', 'Normal:Colors,FloatBorder:BrowserBorder')
@@ -65,10 +65,11 @@ endfunction
 function! s:Opener(storage)
     let l:nnn = b:nnn
     let l:buf = b:prev
-    " delete terminal buffer
+    " if there is nothing to read.
     if !filereadable(a:storage)
         redraw!
-        " Nothing to read.
+        " delete terminal buffer
+        exec "bw! ".l:nnn
         return
     endif
 
