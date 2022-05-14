@@ -87,6 +87,8 @@ function! s:Opener(storage)
     redraw!
     " wipeout terminal buffer
     exec "bw! ".l:nnn
+    " detect the filetype of first opened file
+    filetype detect
 endfunction
 "}}}
 
@@ -98,7 +100,7 @@ augroup nnn
     " every time a terminal buffer is closed, check
     " if it was a nnn instance. If it was, then open
     " the files
-    autocmd TermClose * if exists('b:nnn') | call <SID>Opener(b:temp) | filetype detect | endif
+    autocmd TermClose * if exists('b:nnn') | call <SID>Opener(b:temp) | endif
     " if the file selected is a directory, start in nnn
     autocmd VimEnter * if isdirectory(expand("%")) | call <SID>NNNChooser() | execute 'startinsert' | endif
 
