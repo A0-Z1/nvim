@@ -225,6 +225,7 @@ EOF
 
 " indent line filetypes
 let g:indent_blankline_filetype_exclude = ['vimwiki', 'text', 'markdown', 'dashboard', 'csv', 'nerdtree', 'netrw', 'help', 'rdoc']
+let g:indent_blankline_buftype_exclude = ['terminal']
 let g:indent_blankline_max_indent_increase = 1
 let g:indent_blankline_show_current_context = v:true
 let g:indent_blankline_show_current_context_start = v:true
@@ -302,11 +303,11 @@ nnoremap <silent> <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <silent> <leader>eg :vsplit ~/.config/nvim/ginit.vim<CR>
 " Source init.vim
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
-nnoremap <silent> <C-*> #
 " jump to alternate buffer (also CTRL_^)
-nnoremap <silent> # <C-^>
+nnoremap <silent> <SPACE> <C-^>
 " remap fold/unfold
-nnoremap <silent> <SPACE> za
+nnoremap <silent> <BS> za
+nnoremap <silent> <S-BS> zA
 " Remap window movements
 nnoremap <silent> <A-h> <C-w>h
 nnoremap <silent> <A-j> <C-w>j
