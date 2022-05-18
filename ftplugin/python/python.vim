@@ -18,4 +18,5 @@ nnoremap <silent><buffer> <C-up> :call PrevChunk()<CR>
 
 if exists(':GuiFont')
     nnoremap <buffer><silent> <C-ENTER> :call SendDownLine_Python()<CR>
+    vnoremap <buffer><silent> <C-ENTER> :<C-U>call DownSelection_nonewline()<CR>
 endif                                                 

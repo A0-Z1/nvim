@@ -39,6 +39,7 @@ syntax on
 set listchars=eol:↴,lead:⋅,tab:<->
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+"set foldlevelstart=99
 " set blinking
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
               \,a:blinkwait400-blinkoff600-blinkon900-Cursor/lCursor
@@ -308,6 +309,7 @@ nnoremap <silent> <SPACE> <C-^>
 " remap fold/unfold
 nnoremap <silent> <BS> za
 nnoremap <silent> <S-BS> zA
+nnoremap <silent> <C-S-BS> :call ToggleFold()<CR>
 " Remap window movements
 nnoremap <silent> <A-h> <C-w>h
 nnoremap <silent> <A-j> <C-w>j
@@ -378,3 +380,14 @@ nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 " Zen Mode
 nnoremap <silent><leader>zz :ZenMode<CR>
 "}}}
+
+" Put all functions here
+" {{{
+function! ToggleFold()
+    if &foldlevel == 0
+        set foldlevel=99
+    else
+        set foldlevel=0
+    endif
+endfunction
+" }}}

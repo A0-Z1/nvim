@@ -163,6 +163,13 @@ function! CurrentSel()
     endif
 endfunction
 
+function! CurrentSel_nonewline()
+    call SendCmd(Get_visual_selection_nonewline()."\n")
+    if bufwinnr(t:term_buf) != -1
+        call ShowLastLine()
+    endif
+endfunction
+
 function! DownLine()
     if t:term_id ==# -1
         echohl Warning | echom "No terminal active!" | echohl None
@@ -178,6 +185,16 @@ function! DownSelection()
         echohl Warning | echom "No terminal active!" | echohl None
     else
         call CurrentSel()
+        execute "normal! j"
+    endif
+endfunction
+
+function! DownSelection_nonewline()
+    if t:term_id ==# -1
+        stopinsert
+        echohl Warning | echom "No terminal active!" | echohl None
+    else
+        call CurrentSel_nonewline()
         execute "normal! j"
     endif
 endfunction
