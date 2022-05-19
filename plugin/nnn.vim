@@ -110,6 +110,6 @@ augroup END
 """ commands and remaps
 "{{{
 command! -nargs=? NNN silent call <SID>NNNChoose(<f-args>)
-nmap <silent> <leader>, <Plug>NNNChoose_file
+nmap <silent> <leader><leader> <Plug>NNNChoose_file
 nnoremap <Plug>NNNChoose_file :NNN<CR>
 "}}}

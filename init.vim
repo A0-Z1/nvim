@@ -170,31 +170,31 @@ let g:dashboard_custom_header = [
 \]
 let g:dashboard_custom_section={
             \ 'book_marks': {
-                \ 'description': [' Jump to bookmarks                 ,fm'],
-                \ 'command': 'DashboardJumpMark' },
-            \ 'find_file': {
-                \ 'description': [' Find File                         ,ff'],
-                \ 'command': 'DashboardFindFile' },
-            \ 'new_file': {
-                \ 'description': [' New File                          ,cn'],
-                \ 'command': 'DashboardNewFile' },
-            \ 'init': {
-                \ 'description': [' Jump to init                      ,ev'],
-                \ 'command': 'edit $MYVIMRC' },
-            \ 'last_session': {
-                \ 'description': [' Last Session                      ,sl'],
-                \ 'command': 'SessionLoad' },
-            \ 'find_history': {
-                \ 'description': ['ﭯ Recently opened files             ,fh'],
+                \ 'description': [' Jump to bookmarks                 SPC f m'],
+                \ 'command': 'DashboardJumpMark' },                          
+            \ 'find_file': {                                                 
+                \ 'description': [' Find File                         SPC f f'],
+                \ 'command': 'DashboardFindFile' },                          
+            \ 'new_file': {                                                  
+                \ 'description': [' New File                          SPC c n'],
+                \ 'command': 'DashboardNewFile' },                           
+            \ 'init': {                                                      
+                \ 'description': [' Jump to init                      SPC e v'],
+                \ 'command': 'edit $MYVIMRC' },                              
+            \ 'last_session': {                                              
+                \ 'description': [' Last Session                      SPC s l'],
+                \ 'command': 'SessionLoad' },                                
+            \ 'find_history': {                                              
+                \ 'description': ['ﭯ Recently opened files             SPC f h'],
                 \ 'command': 'DashboardFindHistory' },
             \ 'open_browser': {
-                \ 'description': [' Open File Browser                 ,, '],
+                \ 'description': [' Open File Browser                 SPC SPC'],
                 \ 'command': 'NNN' },
             \ 'select_wiki': {
-                \ 'description': [' Select Wiki                       ,ws'],
-                \ 'command': 'VimwikiUISelect' },
-            \ 'go_to_scripts': {
-                \ 'description': ['亮Jump to my scripts                ,fs'],
+                \ 'description': [' Select Wiki                       SPC w s'],
+                \ 'command': 'VimwikiUISelect' },                            
+            \ 'go_to_scripts': {                                             
+                \ 'description': ['亮Jump to my scripts                SPC f s'],
                 \ 'command': 'Files /home/ld/.scripts' },
   \ }
 
@@ -281,7 +281,7 @@ hi Error guifg=red
 
 " Put all the global mappings and commands here
 "{{{
-let mapleader = ","
+let mapleader = "\<SPACE>"
 let maplocalleader ="\\"
 
 " copy to clipboard
@@ -305,7 +305,7 @@ nnoremap <silent> <leader>eg :vsplit ~/.config/nvim/ginit.vim<CR>
 " Source init.vim
 nnoremap <silent> <leader>sv :source $MYVIMRC<CR>
 " jump to alternate buffer (also CTRL_^)
-nnoremap <silent> <SPACE> <C-^>
+nnoremap <silent> - <C-^>
 " remap fold/unfold
 nnoremap <silent> <BS> za
 nnoremap <silent> <S-BS> zA
@@ -343,7 +343,7 @@ nnoremap <silent> <leader>qp :cprev<CR>
 nnoremap <silent> <leader>qf :cfirst<CR>
 nnoremap <silent> <leader>ql :clast<CR>
 " compile
-nnoremap <silent> <leader>m :make %<CR>
+nnoremap <silent> <leader>x :make %<CR>
 " Project drawer
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 " change directory to local file
