@@ -378,7 +378,7 @@ nnoremap <silent> <Leader>cn :DashboardNewFile<CR>
 "nnoremap <silent> <leader>ss :mksession! /home/ld/.cache/vim/session/default.vim<CR>:echo "Session saved"<CR>
 "nnoremap <silent> <leader>ll :source /home/ld/.cache/vim/session/default.vim<CR>:echo "Session restored"<CR>
 " Zen Mode
-nnoremap <silent><leader>zz :ZenMode<CR>
+nnoremap <silent><leader>z :ZenMode<CR>
 "}}}
 
 " Put all functions here
