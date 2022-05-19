@@ -164,7 +164,12 @@ function! CurrentSel()
 endfunction
 
 function! CurrentSel_nonewline()
-    call SendCmd(Get_visual_selection_nonewline()."\n")
+    if (getline("'>") =~ "^    ") || (getline("'>") == '')
+        let cmd = Get_visual_selection_nonewline()."\n\n"
+    else
+        let cmd = Get_visual_selection_nonewline()."\n"
+    endif
+    call SendCmd(cmd)
     if bufwinnr(t:term_buf) != -1
         call ShowLastLine()
     endif
